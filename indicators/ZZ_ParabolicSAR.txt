@@ -1,0 +1,85 @@
+inputs: 	datanum( numericsimple),
+		AfStep( numericsimple ),                                                    
+		AfLimit( numericsimple ),                                                    
+		oParCl( numericref ),                                                             
+		oParOp( numericref ),                              
+		oPosition( numericref ),                                           
+		oReverse( numericref ) ;                                                      
+
+variables: 	SSstop( 0 ), 
+		LLstop( 0 ), 
+		accfactor( 0 ),
+		dhigh(0),
+		dlow(0);
+
+dhigh = high of data(datanum);
+dlow = low of data(datanum);
+
+if CurrentBar = 1 then begin
+	oParOp = dhigh;
+	oPosition = -1;
+	SSStop = dhigh ;
+	LLStop = dlow ;
+end;
+
+oReverse = 0 ;
+if dhigh > SSStop then SSStop = dhigh ;                                        
+if dlow  < LLStop then LLStop = dlow ;
+				                                      
+if oPosition = 1 then begin
+	if dlow <= oParOp then begin
+		oPosition = -1 ;
+		oReverse = -1 ;
+				                                                          
+		oParCl = SSStop;	                                     
+		SSStop = dhigh;				                                               
+		LLStop  = dlow ;	
+		                                              
+		accfactor = AfStep ;				                        
+		oParOp = oParCl + accfactor * ( LLStop - oParCl ) ;
+				                                               
+		if oParOp < dhigh    then oParOp = dhigh;		                                                    
+		if oParOp < dhigh[1] then oParOp = dhigh[1];				                         
+	end
+	else begin
+		oParCl = oParOp ;
+				          
+		condition1 = SSStop > SSStop[1] and accfactor < AfLimit ;
+		if condition1 then		                                                     
+			accfactor = MinList( accfactor + AfStep, AfLimit ) ;
+			oParOp = oParCl + accfactor * ( SSStop - oParCl ) ;
+			if oParOp > dlow    then oParOp = dlow ;		                                                   
+			if oParOp > dlow[1] then oParOp = dlow[1] ;                                
+	end;
+end;
+
+	
+if oPosition = -1 then begin
+	if dhigh >= oParOp then begin                                                
+		oPosition = 1 ;
+		oReverse = 1 ;
+				                                                          
+		oParCl = LLStop ;				                                     
+		SSStop = dhigh ;				                                               
+		LLStop  = dlow ;
+				                                              
+		accfactor = AfStep ;		                        
+		oParOp = oParCl + accfactor * ( SSStop - oParCl ) ;
+				                                               
+		if oParOp > dlow    then oParOp = dlow ;		                                                   
+		if oParOp > dlow[1] then oParOp = dlow[1] ;	                             
+		end
+	else begin
+		oParCl = oParOp ;
+
+		condition1 = LLStop < LLStop[1] and accfactor < AfLimit ;				                                                                   
+		if condition1 then	                                                     
+			accfactor = MinList( accfactor + AfStep, AfLimit ) ;	                         
+			oParOp = oParCl + accfactor * ( LLStop - oParCl);           
+			if oParOp < dhigh    then oParOp = dhigh ;		                                                    
+			if oParOp < dhigh[1] then oParOp = dhigh[1] ;		                              
+	end;
+end;
+
+ZZ_ParabolicSAR = 1 ;
+

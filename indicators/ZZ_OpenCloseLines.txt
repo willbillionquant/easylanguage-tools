@@ -1,0 +1,30 @@
+
+inputs: 	FOpen(0815),FClose(1600),color(cyan);
+
+vars: 		tlvar1(0),tlvar2(0),regopen(0),tlvar3(0);
+
+if currentbar > 1 and time = datetime2eltime(eltimetodatetime(FOpen) + barinterval / 1440) then begin
+	regopen = open;
+	tlvar1 = tl_new(date,time,Low*0.05,date,time,High*20);
+	tl_setcolor(tlvar1,color);
+	tl_setstyle(tlvar1,tool_dashed2);
+	
+	if Fclose > Fopen then begin
+		tlvar3 = tl_new(date,time,regopen,date,Fclose,regopen);
+		tl_setcolor(tlvar3,color);
+		tl_setsize(tlvar3,2);	
+	end;
+	
+	if Fclose < Fopen then begin
+		tlvar3 = tl_new(date,time,regopen,juliantodate(datetojulian(date)+1),Fclose,regopen);
+		tl_setcolor(tlvar3,color);
+		tl_setsize(tlvar3,2);
+	end;
+end;
+
+if time = FClose then begin
+	tlvar2 = tl_new(date,time,Low*0.05,date,time,High*20);
+	tl_setcolor(tlvar2,color);
+	tl_setstyle(tlvar2,tool_dashed2);
+end;
+
