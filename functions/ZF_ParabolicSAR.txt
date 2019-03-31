@@ -1,0 +1,78 @@
+inputs: 	AfStep( numericsimple ),                                                    
+		AfLimit( numericsimple ),                                                    
+		oParCl( numericref ),                                                             
+		oParOp( numericref ),                              
+		oPosition( numericref ),                                           
+		oReverse( numericref ) ;                                                      
+
+variables: 	accfactor( 0 ), dhigh(0), dlow(0);
+
+if CurrentBar = 1 then begin
+	oParOp = high;	
+	oPosition = -1;	
+	dhigh = high;		dlow = low;
+end;
+
+oreverse = 0;
+if high > dhigh then dhigh = high;
+if low < dlow then dlow = low;
+
+if oPosition = 1 then begin
+	if low <= oParOp then begin
+		oPosition = -1 ;		oReverse = -1 ;
+		
+		oParCl = dhigh;
+		
+		dhigh = high;		dlow = low;
+						                                                                                                    
+		accfactor = AfStep ;	
+					                        
+		oParOp = oParCl + accfactor * ( dlow - oParCl ) ;
+				                                               
+		if oParOp < high    then oParOp = high;		
+		                                                    
+		if oParOp < high[1] then oParOp = high[1];	
+					                         
+	end else begin
+		
+		oParCl = oParOp ;
+				          
+		condition1 = dhigh > dhigh[1] and accfactor < AfLimit ;
+		
+		if condition1 then accfactor = MinList( accfactor + AfStep, AfLimit ) ;
+		
+		oParOp = oParCl + accfactor * ( dhigh - oParCl ) ;
+		                                                   
+		if oParOp > low[1] then oParOp = low[1] ;                                
+	end;
+end
+	
+else begin
+	if high >= oParOp then begin                                                
+		oPosition = 1 ;		oReverse = 1 ;
+				                                                          
+		oParCl = dlow ;				                                     				                              
+				       
+		dhigh = high;		dlow = low;				       
+				                                              
+		accfactor = AfStep ;		                        
+		oParOp = oParCl + accfactor * ( dhigh - oParCl ) ;
+				                                               
+		if oParOp > low    then oParOp = low ;		                                                   
+		if oParOp > low[1] then oParOp = low[1] ;	                             
+
+	end else begin
+		oParCl = oParOp ;
+
+		condition2 = dlow < dlow[1] and accfactor < AfLimit ;	
+					                                                                   
+		if condition2 then accfactor = MinList( accfactor + AfStep, AfLimit ) ;	                         
+		
+		oParOp = oParCl + accfactor * ( dlow - oParCl);           
+		
+		if oParOp < high[1] then oParOp = high[1] ;		                              
+	end;
+end;
+
+ZZ_ParabolicSAR = 1 ;
+
