@@ -1,0 +1,15 @@
+inputs:  levratio(4), ptfactor(50);
+
+vars:    betsize(1);
+
+//Define number of contracts by fixed leverage ratio
+betsize = minlist(floor(levratio*(InitialCapital+netprofit)/(ptfactor*close)), maxbet);
+
+//condition to long HSI Futures
+condition1 = ....
+
+if condition1 then buy betsize contracts next bar at market;
+
+//condition to short HSI Futures
+condition2 = ....    
+if condition2 then sellshort betsize contracts next bar at market;
