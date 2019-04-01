@@ -1,0 +1,15 @@
+inputs: Price(TypicalPrice),Len(32),OB(200),OS(-200),OBColor(cyan),OSColor(red);
+
+vars: Midval(0),ZScoreVal(0); 
+
+MidVal = averageFC(Price,Len);
+
+ZScoreVal = 100 * (Price - Midval) / StandardDev(Price,Len,1);
+
+plot1(ZScoreVal,"BBZ-Score");
+plot10(OB,"Overbot");
+plot20(OS,"Oversld");
+
+if ZScoreVal > OB then setplotcolor(1,OBColor);
+if ZScoreVal < OS then setplotcolor(1,OSColor);
+

@@ -1,0 +1,23 @@
+inputs:	RSILen(14),Stochlen(14),
+		fastlen(3),slowlen(3),
+		bullval(80),bearval(20);
+
+vars:		RSIVal(0),RSIHi(0),RSILo(0),
+		stochrsival(0),Kval(0),Dval(0);
+
+RSIVal = RSI(close,RSILen);
+
+RSIHi = highest(RSIVal, Stochlen);
+RSILo = lowest(RSIVal, Stochlen);
+if RSIHi > RSILo then stochrsival = 100 * (RSIVal - RSILo) / (RSIHi - RSILo);
+if RSIHi = RSILo then stochrsival = 0;
+
+Kval = averageFC(stochrsival,fastlen);
+Dval = averageFC(Kval,slowlen);
+
+plot1(KVal,"%K StochRSI");
+plot2(DVal,"%D StochRSI");
+plot3(bullval,"BullVal");
+plot4(bearval,"BearVal");
+
+

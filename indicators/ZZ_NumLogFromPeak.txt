@@ -1,0 +1,18 @@
+inputs:	SDlen(64),highlen(256);
+
+vars:		Highval(0),logfromhi(0),
+		daylog(0),SDVal(0),numlog(0);
+
+if currentbar >= maxlist(highlen,sdlen) then begin
+	highval = highest(high,highlen)[1];
+	logfromhi = log(highval / close);
+	
+	daylog = log(close / close[1]);
+	SDVal = StdDev(daylog,sdlen);
+	numlog = logfromhi / sdval;
+	
+	plot1(numlog,"numlog");
+	
+
+end;
+

@@ -1,0 +1,14 @@
+
+vars: tlvar(0),barratio(0),chgpct(0);
+
+If dayofweek(date) = 5 and dayofmonth(date) >= 1 and dayofmonth(date) <= 7 then begin 
+	tlvar = tl_new(date,time,0.05*Low,date,time,20*High);
+	tl_setcolor(tlvar,magenta);
+	tl_setstyle(tlvar,tool_dotted);
+	
+	barratio = 100 * (close - open) / (high - low);
+	chgpct = 100 * (close - close[1]) / close[1];
+	print(datetojulian(date):5:0,",",open:7:2,",",high:7:2,",",low:7:2,",",close:7:2,",",barratio:2:2,",",chgpct:2:2);
+end;
+
+

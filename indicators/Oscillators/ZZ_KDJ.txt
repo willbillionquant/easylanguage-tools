@@ -1,0 +1,34 @@
+inputs: 	PriceH( High ), PriceL( Low ),PriceC( Close ), 
+		STCLen( 14 ), TFMultiple(1),JLen(8),
+		Len1( 3 ), Len2( 3 ),                                
+		SmoothingType( 1 ),KWeight(3.000),Dweight(2.000),OBratio(0.1),
+		JOBColor(red),JOSColor(green);
+		
+vars:		STCVal(0),ofastK( 0 ),ofastD(0),oslowK(0),oslowD(0),
+		barO(0),barH(0),barL(0),barC(0),
+		slowJ(0),slowJAvg(0),
+		JOB(0),JOS(0);
+
+barO = open[TFmultiple-1];
+barH = highest(high,TFmultiple);
+barL = lowest(low,TFmultiple);
+barC = close;
+
+STCVal = Stochastic( barH, barL, barC, STCLen*TFMultiple, Len1*TFMultiple, Len2*TFMultiple, SmoothingType, 
+	ofastK, ofastD, oslowK, oslowD ) ;
+
+slowJ = (KWeight * oslowK - DWeight * oslowD) / (Kweight - Dweight);
+slowJAvg = average(slowJ,Jlen);
+
+JOB = 100 * ((0.5 + obratio)*kweight + (0.5 - obratio)*(1-kweight));
+JOS = 100 * ((0.5 - obratio)*kweight + (0.5 + obratio)*(1-kweight));
+
+
+plot1(slowJ,"J-value");
+plot2(slowJAvg,"J-Avg");
+plot11(JOS,"J-OS");
+plot12(JOB,"J-OB");
+
+if slowJ > JOB then SetPlotColor(1,JOBColor);
+if slowJ < JOS then setplotcolor(1,JOSColor);               
+

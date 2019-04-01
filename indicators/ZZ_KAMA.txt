@@ -1,0 +1,22 @@
+// Kaufman Adaptive Moving Average (KAMA)
+
+inputs:	price(close),erlen(10), fastlen(2), slowlen(30);
+	
+vars:		er(0), vol(0), chg(0), smooth(0), KAMA(0);
+
+if barnumber >= erlen then begin
+
+	if barnumber = erlen then KAMA = averagefc(price, erlen);
+
+	if barnumber > erlen then begin
+		chg = absvalue(close - close[10]);
+		vol = summationfc(absvalue(close-close[1]), erlen);
+		er = chg / vol;
+		smooth = power(er * 2/(fastlen+1) + (1 - er) * 2/(slowlen+1), 2);
+		KAMA = ( 1 - smooth ) * KAMA[1] + smooth * price;
+	end;
+	
+	plot1(KAMA, "KAMA");
+
+end;
+

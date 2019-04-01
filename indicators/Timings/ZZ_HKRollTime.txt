@@ -1,0 +1,20 @@
+condition91 = ((date = 1130426) or (date = 1130529) or (date = 1130626) or (date = 1130729) or (date = 1130828) or (date = 1130926) or (date = 1131029) or 
+		 (date = 1131127) or (date = 1131227) or (date = 1140128) or (date = 1140226) or (date = 1140327) or (date = 1140428) or 
+		 (date = 1140528) or (date = 1140626) or (date = 1140729) or (date = 1140827) or (date = 1140926) or (date = 1141029)) 
+		  and (time = 2300);
+
+condition92 = ((date = 1141126) or (date = 1141229) or (date = 1150128) or (date = 1150225) or (date = 1150327) or 
+		 (date = 1150428) or (date = 1150527) or (date = 1150626) or (date = 1150729) or (date = 1150827) or (date = 1150925) or 
+		 (date = 1151028) or (date = 1151126) or (date = 1151229) or (date = 1160127) or (date = 1160225) or (date = 1160329) or 
+		 (date = 1160427) or (date = 1160527) or (date = 1160628) or (date = 1160727) or (date = 1160829) or (date = 1160928) or 
+		 (date = 1161027) or (date = 1161128) or (date = 1161228) or (date = 1170126) or (date = 1170224) or (date = 1170329) or 
+		 (date = 1170426) or (date = 1170526) or (date = 1170628) or (date = 1170727) or (date = 1170829) or (date = 1170927) or 
+		 (date = 1171027)) and (time = 2345);
+
+condition93 = ((date = 1171129) or (date = 1171228) or (date = 1180130) or (date = 1180227) or (date = 1180328) or (date = 1180427) or
+		 (date = 1180530) or (date = 1180628) or (date = 1180728) or (date = 1180830) or (date = 1180927) or (date = 1181030) or
+		 (date = 1181129) or (date = 1181228) or (date = 1190130) or (date = 1190227) or (date = 1190328) or (date = 1190427) or
+		 (date = 1190530) or (date = 1190627) or (date = 1190730) or (date = 1190829) or (date = 1190927) or (date = 1191030) or
+		 (date = 1191128) or (date = 1191228)) and (time = 0100);
+		 
+condition99 = (condition91 or condition92 or condition93);

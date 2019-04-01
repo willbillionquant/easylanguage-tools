@@ -1,0 +1,24 @@
+inputs:	Price(typicalprice),Midlen(50),Slowlen(200),
+		SlowROCLen(125),MidROCLen(20),FastLen(8),
+		MidPct(10),SlowPct(30);
+
+vars:		Fastpct(0),Midval(0),Slowval(0),SlowROCVal(0),MidROCVal(0),
+		RSIVal1(0),RSIVal2(0),SCTRScore(0);
+
+
+Fastpct = 50 - midpct - slowpct;
+RSIVal1 = RSI(Price,midROCLen)/100;
+RSIVal2 = RSI(Price,FastLen)/100;
+
+
+Midval = (Price - XAverage(Price,midlen))/XAverage(Price,midlen);
+Slowval = (Price - XAverage(Price,Slowlen))/XAverage(Price,Slowlen);
+
+MidROCVal = (Price - Price[midROCLen])/Price[midROCLen];
+SlowROCVal = (Price - Price[slowROCLen])/Price[slowROCLen];
+
+SCTRScore = SlowPct * (SLowval + SlowROCVal) + MidPct * (Midval + MidROCVal) + fastpct * (RSIVal1 + RSIVal2);
+
+plot1(SCTRScore,"SCTR",magenta);
+ 
+
