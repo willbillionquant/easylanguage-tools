@@ -1,13 +1,5 @@
 # easylanguage-tools
 Easylanguage scripts and files relevant to program trading conducted on Multicharts/Tradestation. 
-Scripts fall into 3 categories: 
-
-- [Functions](https://github.com/willbillionquant/easylanguage-tools/tree/master/functions)
-
-- [Indicators](https://github.com/willbillionquant/easylanguage-tools/tree/master/indicators)
-
-- [Signals](https://github.com/willbillionquant/easylanguage-tools/tree/master/signals)
-
 For a brief description of each item:
 
 ## Functions
@@ -18,7 +10,7 @@ a rewrite of the parabolic SAR functions
 ## Indicators
 
 - [Opening Price Levels](https://github.com/willbillionquant/easylanguage-tools/blob/master/indicators/ZZ_OpenCloseLines.txt):
-drawing horizontal trendlines of each day's opening price with the prescribed opening and closing time.
+drawing horizontal lines of each day's opening price with prescribed opening and closing time.
 
 - [Parabolic SAR](https://github.com/willbillionquant/easylanguage-tools/blob/master/indicators/ZZ_ParabolicSAR.txt):
 a rewrite of the parabolic SAR indicators (with plots)
