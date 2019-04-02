@@ -9,6 +9,16 @@ a rewrite of the parabolic SAR functions
 
 ## Indicators
 
+- [Ehlers](https://github.com/willbillionquant/easylanguage-tools/tree/master/indicators/Ehlers):
+Some John Ehlers indicators, e.g. Stochastic RSI.
+
+- [Equities](https://github.com/willbillionquant/easylanguage-tools/tree/master/indicators/Equities):
+Indicators which applied most appropriately on daily or longer timeframe, such as
+   -  [SCTR](https://github.com/willbillionquant/easylanguage-tools/blob/master/indicators/Equities/ZZ_SCTR.txt):
+   Stockcharts Technical Rank indicator with slight modification
+   -  [NumLogFromPeak](https://github.com/willbillionquant/easylanguage-tools/blob/master/indicators/Equities/ZZ_NumLogFromPeak.txt):
+   Number of daily sigma from the peak price in a period (default 256 trading days/52 weeks)
+
 - [Opening Price Levels](https://github.com/willbillionquant/easylanguage-tools/blob/master/indicators/ZZ_OpenCloseLines.txt):
 drawing horizontal lines of each day's opening price with prescribed opening and closing time.
 
