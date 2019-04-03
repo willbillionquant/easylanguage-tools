@@ -40,7 +40,7 @@ Plotting specific time, e.g.
 	Plotting first Friday on daily chart. (usually the nonfarm payroll day)
 	-	[3rdfribar](https://github.com/willbillionquant/easylanguage-tools/blob/master/indicators/Timings/ZZ_3rdfribar.txt):
 	Plotting first Friday on daily chart. (usually the expiry day for US equities & futures monthly options)
-	-	[HKRollTime] (https://github.com/willbillionquant/easylanguage-tools/blob/master/indicators/Timings/ZZ_HKRollTime.txt):
+	-	[HKRollTime](https://github.com/willbillionquant/easylanguage-tools/blob/master/indicators/Timings/ZZ_HKRollTime.txt):
 	Intraday timing for Hong Kong index futures rollover on the day prior to settlement day (2nd last working day in a month)
 
 ## Signals
